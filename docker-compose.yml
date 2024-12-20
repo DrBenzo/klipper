@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  klipper:
+    build: .
+    container_name: klipper
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "7125:7125"   # Moonraker API
+      - "80:80"       # Mainsail Web UI
+    volumes:
+      - ./config:/opt/printer_config
+      - /dev:/dev     # Доступ к USB устройствам
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0  # Измените в соответствии с вашим портом принтера 
